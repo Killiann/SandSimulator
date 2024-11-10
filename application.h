@@ -22,7 +22,7 @@ private:
 	sf::Clock clock;
 	sf::Time timeSinceLastFrame{ sf::Time::Zero };
 	sf::Time timePerFrame;
-	const float loopRate{ 20.f };
+	const float loopRate{ 60 };
 
 	sf::RenderWindow mWindow;	
 	sf::Mouse mouse;

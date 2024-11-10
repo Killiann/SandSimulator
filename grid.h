@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "pixel.h"
+#include <random>
 
 class grid
 {
@@ -35,9 +36,16 @@ private:
 	std::vector<pixel*> mValues_copy;
 	sf::VertexArray mQuads;
 
+	std::random_device dev;
+	std::mt19937 rng;
+	std::uniform_int_distribution<std::mt19937::result_type> rndSand;
+
 private:
 	void swapPixels(int pI1, int pI2, std::vector<pixel*>& pValues);
 	void setQuadColor(int pX, int pY, sf::Color pC);
 	inline int getIterator(int x, int y) { return y * mWidth + x; }
+
+	//temp
+	sf::Color getSandColor();
 };
 

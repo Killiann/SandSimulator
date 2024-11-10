@@ -4,7 +4,7 @@ sf::Color CL_EMPTY = sf::Color::Black;
 sf::Color CL_SAND = sf::Color::Yellow;
 sf::Color CL_WATER = sf::Color::Blue;
 
-grid::grid(int pW, int pH, int pPixelSize) : mWidth(pW), mHeight(pH), mPixelSize(pPixelSize){	
+grid::grid(int pW, int pH, int pPixelSize) : mWidth(pW), mHeight(pH), mPixelSize(pPixelSize), rng(dev()), rndSand(0,4){	
 	mGridSize = mWidth * mHeight;
 	
 	mQuads.setPrimitiveType(sf::Quads);
@@ -118,7 +118,7 @@ void grid::drawPixel(int pX, int pY, pixel_type pType) {
 		setQuadColor(pX, pY, CL_EMPTY);
 		break;
 	case(px_sand):
-		setQuadColor(pX, pY, CL_SAND);
+		setQuadColor(pX, pY, getSandColor());
 		break;
 	case(px_water):
 		setQuadColor(pX, pY, CL_WATER);
@@ -138,4 +138,15 @@ void grid::setQuadColor(int pX, int pY, sf::Color pC) {
 
 void grid::render(sf::RenderTarget& mWindow) {
 	mWindow.draw(mQuads);
+}
+
+sf::Color grid::getSandColor() {
+	int r = rndSand(rng);
+	switch (r) {
+	case(0): return sf::Color(217, 187, 132, 255); break;
+	case(1): return sf::Color(242, 214, 179, 255); break;
+	case(2): return sf::Color(191, 135, 86, 255); break;
+	case(3): return sf::Color(217, 179, 145, 255); break;
+	case(4): return sf::Color(166, 96, 56, 255); break;
+	}
 }
